@@ -27,8 +27,21 @@ def parse_args() -> argparse.Namespace:
         help="Profile to be used for streaming.",
     )
     parser.add_argument(
-        "--device-ip", help="IP address to connect to the device over wifi"
+        "--device_ip", help="IP address to connect to the device over wifi"
     )
+
+    parser.add_argument(
+    "--yolo_weights", 
+    required=True,
+    type=str
+    )
+
+    parser.add_argument(
+    "--yolo_cfg", 
+    required=True,
+    type=str
+    )
+
     return parser.parse_args()
 
 class StreamingClientObserver():
@@ -66,8 +79,8 @@ def update_iptables() -> None:
     subprocess.run(update_iptables_cmd)
 
 # Load and prepare YOLO model
-def load_yolo():
-    net = cv2.dnn.readNet("./yolo_models/yolov4-tiny.weights", "./yolo_models/yolov4-tiny.cfg")
+def load_yolo(args):
+    net = cv2.dnn.readNet(f"./yolo_models/{args.yolo_weights}", f"./yolo_models/{args.yolo_cfg}")
     classes = []
     with open("./yolo_models/coco.names.txt", "r") as f:
         classes = [line.strip() for line in f.readlines()]
@@ -186,7 +199,7 @@ def main():
     cv2.resizeWindow(rgb_window, 1024, 1024)
     #cv2.setWindowProperty(rgb_window, cv2.WND_PROP_TOPMOST, 1)
     cv2.moveWindow(rgb_window, 50, 50)
-    net, classes, output_layers = load_yolo()
+    net, classes, output_layers = load_yolo(args)
 
     while not quit_keypress():
         if aria.CameraId.Rgb in observer.images:
