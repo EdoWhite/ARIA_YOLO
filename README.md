@@ -22,10 +22,12 @@ For detailed requirements, refer to the official [Project Aria Tools documentati
 Run the script with the following commands, depending on your choice of interface (USB or WiFi) and specifying the YOLO configuration and weights:
 - For USB interface and YOLOv3:
 ```bash
+cd YOLO
 python realtimeYOLO.py --interface usb --yolo_weights yolov3-tiny.weights --yolo_cfg yolov3-tiny.cfg
 ```
 - For WiFi interface and YOLOv3:
 ```bash
+cd YOLO
 python realtimeYOLO.py --interface wifi --yolo_weights yolov3-tiny.weights --yolo_cfg yolov3-tiny.cfg --device_ip 10.7.129.82
 ```
 
