@@ -80,7 +80,7 @@ def update_iptables() -> None:
 
 # Load and prepare YOLO model
 def load_yolo(args):
-    net = cv2.dnn.readNet(f"./yolo_models/{args.yolo_weights}", f"./yolo_models/{args.yolo_cfg}")
+    net = cv2.dnn.readNet(args.yolo_weights, args.yolo_cfg)
     classes = []
     with open("./yolo_models/coco.names.txt", "r") as f:
         classes = [line.strip() for line in f.readlines()]
