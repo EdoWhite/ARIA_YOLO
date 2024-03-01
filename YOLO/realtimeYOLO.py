@@ -196,7 +196,7 @@ def main():
 
     rgb_window = "Aria RGB"
     cv2.namedWindow(rgb_window, cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(rgb_window, 1024, 1024)
+    cv2.resizeWindow(rgb_window, 1080, 1080)
     #cv2.setWindowProperty(rgb_window, cv2.WND_PROP_TOPMOST, 1)
     cv2.moveWindow(rgb_window, 50, 50)
     net, classes, output_layers = load_yolo(args)
